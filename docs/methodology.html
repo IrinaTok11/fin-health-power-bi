@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <base href="./">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>
+    Methodology — Financial Health (Power BI)
+    </title>
+    <meta content="#52837B" name="theme-color"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="./assets/css/portfolio.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <div class="wrap navwrap">
+        <a class="brand" href="index.html#top">
+        Irina Tokmianina
+        </a>
+        <div class="navlinks">
+          <a href="index.html#highlights">
+          HIGHLIGHTS
+          </a>
+          <a href="index.html#variants">
+          VARIANTS
+          </a>
+          <a href="index.html#screens">
+          SCREENSHOTS
+          </a>
+          <a href="index.html#tech-stack">
+          TECH STACK
+          </a>
+          <a href="methodology.html">
+          METHODOLOGY
+          </a>
+          <a href="index.html#links">
+          LINKS
+          </a>
+          <a class="contact" href="#contact">
+          CONTACT
+          </a>
+        </div>
+      </div>
+    </nav>
+    <header class="hero hero--green methodology-hero">
+      <div class="wrap">
+        <h1>
+          Methodology
+        </h1>
+        <p class="lead">
+          Data model, measures, norms &amp; colour rules for the Power BI report
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="https://github.com/IrinaTok11/fin-health-power-bi" rel="noopener" target="_blank">
+          Repository
+          </a>
+          <a class="btn outline" href="index.html#top">
+          Back to Overview
+          </a>
+        </div>
+      </div>
+    </header>
+    <section class="section section--white">
+      <div class="wrap">
+        <h2>
+          Data model
+        </h2>
+        <h3 style="margin:18px 0 10px;font-size:20px;color:var(--ink);">
+          Tables
+        </h3>
+        <ul class="facts">
+          <li>
+            <strong>
+            parameters
+            </strong>
+            — project parameters and switches (e.g., base/index modes)
+          </li>
+          <li>
+            <strong>
+            ratio_norms
+            </strong>
+            — norm bands and thresholds per KPI
+          </li>
+          <li>
+            <strong>
+            years
+            </strong>
+            — helper dimension for Latest/Base and filtering
+          </li>
+          <li>
+            <strong>
+            ratios
+            </strong>
+            — measure table: KPIs, YoY, status, colors
+          </li>
+          <li>
+            <strong>
+            financials_long
+            </strong>
+            — fact table (yearly values, long format)
+          </li>
+          <li>
+            <strong>
+            palette
+            </strong>
+            — status colour (hex) for legend dots
+          </li>
+        </ul>
+        <h3 style="margin:22px 0 10px;font-size:20px;color:var(--ink);">
+          Relationships
+        </h3>
+        <ul class="facts">
+          <li>
+            <strong>
+            Star join
+            </strong>
+            —
+            <code>
+            financials_long[Year]
+            </code>
+            →
+            <code>
+            years[Year]
+            </code>
+            (many-to-one).
+          </li>
+          <li>
+            <strong>
+            Single model
+            </strong>
+            — both dashboard pages read from the same model; no page‑specific fields.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section section--gray">
+      <div class="wrap">
+        <h2>
+          Calculation logic
+        </h2>
+        <h3 style="margin:18px 0 10px;font-size:20px;color:var(--ink);">
+          Base and latest years
+        </h3>
+        <ul class="facts">
+          <li>
+            <strong>
+            Latest Year
+            </strong>
+            — max available year within current filter context.
+          </li>
+          <li>
+            <strong>
+            Base Year
+            </strong>
+            — comparison year (usually Latest − 1) or a pinned year for indexed visuals.
+          </li>
+        </ul>
+        <h3 style="margin:22px 0 10px;font-size:20px;color:var(--ink);">
+          YoY deltas
+        </h3>
+        <ul class="facts">
+          <li>
+            <strong>
+            YoY Δ
+            </strong>
+            —
+            <code>
+            Value(Latest) − Value(Prev)
+            </code>
+          </li>
+          <li>
+            <strong>
+            YoY Δ %
+            </strong>
+            —
+            <code>
+            DIVIDE(Value(Latest) − Value(Prev), Value(Prev))
+            </code>
+          </li>
+          <li>
+            <strong>
+            Arrow sign
+            </strong>
+            — ▲ if Δ &gt; 0 · ▼ if Δ &lt; 0 · • if Δ = 0 or previous is blank
+          </li>
+          <li>
+            <strong>
+            Defensive blanks
+            </strong>
+            — when previous value is blank/zero, the percent delta is suppressed and the chip shows “–”.
+          </li>
+        </ul>
+        <h3 style="margin:22px 0 10px;font-size:20px;color:var(--ink);">
+          Indexed trends
+        </h3>
+        <div class="facts" style="margin:0;">
+          <div>
+            <strong>
+            Index (e.g., Assets/Equity/Revenue)
+            </strong>
+            —
+            <code>
+            Value / Value(Base Year)
+            </code>
+            → displayed as 100 at the base.
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="wrap">
+        <h2>
+          Norms and flags
+        </h2>
+        <ul class="facts">
+          <li>
+            <strong>
+            Soft band
+            </strong>
+            — each KPI has a neutral zone (Norm Low…Norm High) set in the model and reflected in visuals.
+          </li>
+          <li>
+            <strong>
+            Inputs per KPI
+            </strong>
+            —
+            <code>
+            Norm Low
+            </code>
+            ,
+            <code>
+            Norm High
+            </code>
+            ,
+            <code>
+            better_is
+            </code>
+            ∈ {'{higher, lower}'}
+          </li>
+          <li>
+            <strong>
+            Status buckets
+            </strong>
+            —
+            <em>
+            below
+            </em>
+            — value &lt; Norm Low ·
+            <em>
+            at_norm
+            </em>
+            — within band ·
+            <em>
+            above
+            </em>
+            — value &gt; Norm High
+          </li>
+          <li>
+            <strong>
+            Directionality
+            </strong>
+            — if
+            <code>
+            better_is = higher
+            </code>
+            , moving upward is good; if
+            <code>
+            better_is = lower
+            </code>
+            , moving downward is good.
+          </li>
+          <li>
+            <strong>
+            Colour mapping
+            </strong>
+            — status → hex via the
+            <em>
+            palette
+            </em>
+            ; the same mapping drives badges, legend dots, and bars.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section section--gray">
+      <div class="wrap">
+        <h2>
+          Formatting conventions
+        </h2>
+        <ul class="facts">
+          <li>
+            <strong>
+            DAX style
+            </strong>
+            — comma‑separated arguments; consistent naming
+            <code>
+            grp__KPI__SubKPI__MeasureName
+            </code>
+            .
+          </li>
+          <li>
+            <strong>
+            Number formatting
+            </strong>
+            — percent KPIs use % with sensible decimals; absolute KPIs have compact format (e.g., 1.2M where appropriate).
+          </li>
+          <li>
+            <strong>
+            Tooltips
+            </strong>
+            — show YoY absolute and percent deltas alongside the current value.
+          </li>
+          <li>
+            <strong>
+            Defensive rules
+            </strong>
+            — use
+            <code>
+            DIVIDE
+            </code>
+            ; empty states render “–”.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="wrap">
+        <h2>
+          Visual layer
+        </h2>
+        <h3 style="margin:18px 0 10px;font-size:20px;color:var(--ink);">
+          Deneb (Vega‑Lite)
+        </h3>
+        <ul class="facts">
+          <li>
+            <strong>
+            kpi_bars_numeric.vl.json
+            </strong>
+            — bars for absolute‑value KPIs
+          </li>
+          <li>
+            <strong>
+            kpi_bars_percent.vl.json
+            </strong>
+            — bars for percent KPIs
+          </li>
+          <li>
+            <strong>
+            legend_status.vl.json
+            </strong>
+            — compact legend using palette/status
+          </li>
+          <li>
+            <strong>
+            row_labels.vl.json
+            </strong>
+            — left‑aligned KPI labels
+          </li>
+        </ul>
+        <h3 style="margin:22px 0 10px;font-size:20px;color:var(--ink);">
+          Slicer and layout
+        </h3>
+        <ul class="facts">
+          <li>
+            <strong>
+            Year slicer
+            </strong>
+            — single‑select; Latest/Base handled by measures.
+          </li>
+          <li>
+            <strong>
+            Two‑page setup
+            </strong>
+            — v1 — rounded cards (site style); v2 — flat, print‑friendly for Word.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section section--gray">
+      <div class="wrap">
+        <h2>
+          Files and locations
+        </h2>
+        <ul class="facts">
+          <li>
+            <strong>
+            Screenshots
+            </strong>
+            —
+            <code>
+            cover.png
+            </code>
+            (v1 rounded),
+            <code>
+            cover2.png
+            </code>
+            (v2 flat) — used on the live page.
+          </li>
+          <li>
+            <strong>
+            Measures
+            </strong>
+            —
+            <code>
+            /dax
+            </code>
+            — versioned DAX
+          </li>
+          <li>
+            <strong>
+            Specs
+            </strong>
+            —
+            <code>
+            /deneb
+            </code>
+            — Vega‑Lite JSON (clean, no comments)
+          </li>
+          <li>
+            <strong>
+            Sample data
+            </strong>
+            —
+            <code>
+            /data
+            </code>
+            — anonymised Excel
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="wrap">
+        <h2>
+          Reproducibility checklist
+        </h2>
+        <ul class="facts">
+          <li>
+            <strong>
+            Measures
+            </strong>
+            — versioned and documented
+          </li>
+          <li>
+            <strong>
+            JSON specs
+            </strong>
+            — stored with report for git‑diff transparency
+          </li>
+          <li>
+            <strong>
+            Data
+            </strong>
+            — anonymised sample for structure only
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="contact-band" id="contact">
+      <div class="wrap">
+        <h2 class="contact-title">
+          Get in touch
+        </h2>
+        <p class="contact-sub">
+          Connect on LinkedIn, explore projects on GitHub, or send an email
+        </p>
+        <div class="contact-icons">
+          <a aria-label="LinkedIn" class="icon-circle" href="https://www.linkedin.com/in/tokmianina" rel="noopener" target="_blank">
+          <svg fill="var(--green)" height="28" viewbox="0 0 448 512" width="28" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100.28 448H7.4V148.9h92.88zm-46.44-341a53.67 53.67 0 1 1 53.67-53.67 53.67 53.67 0 0 1-53.67 53.67zM447.9 448h-92.4V302.4c0-34.7-12.5-58.4-43.6-58.4-23.8 0-38 16-44.3 31.4-2.3 5.6-2.9 13.4-2.9 21.3V448h-92.4s1.2-267.1 0-295.1h92.4v41.8c12.3-19 34.3-45.9 83.6-45.9 61 0 106.6 39.8 106.6 125.2z">
+          </path>
+          </svg>
+          </a>
+          <a aria-label="Email" class="icon-circle" href="mailto:irinatokmianina@gmail.com">
+          <svg fill="white" height="28" viewbox="0 0 16 16" width="28" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217l-8 4.8-8-4.8V4z">
+          </path>
+          <path d="M0 6.383v5.617a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6.383l-7.555 4.533a.5.5 0 0 1-.89 0L0 6.383z">
+          </path>
+          </svg>
+          </a>
+          <a aria-label="GitHub" class="icon-circle" href="https://github.com/IrinaTok11" rel="noopener" target="_blank">
+          <svg fill="white" height="28" viewbox="0 0 16 16" width="28" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38
+           0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+           -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+           0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.03
+           2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+           0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+          </path>
+          </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="wrap">
+        <p class="legal">
+          MIT licence  •  Updated Aug 2025  •  © Irina Tokmianina  •  Financial / BI Analyst
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

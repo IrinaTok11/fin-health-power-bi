@@ -1,0 +1,172 @@
+﻿-- financials_long[Assets Base]
+Assets Base = 
+CALCULATE( [Assets Value],
+    FILTER( ALLSELECTED( financials_long ),
+            financials_long[Year] = [Base Year (selected)] ) )
+
+-- financials_long[Assets Index %]
+Assets Index % = 
+VAR v = [Assets Value]
+VAR b = [Assets Base]
+RETURN IF( NOT ISBLANK(v) && NOT ISBLANK(b) && b <> 0, DIVIDE( v, b ) * 100 )
+
+-- financials_long[Assets Value]
+Assets Value = 
+CALCULATE( SUM( financials_long[Value] ),
+           financials_long[Variable_Name] = "total_assets" )
+
+-- financials_long[Equity Base]
+Equity Base = 
+CALCULATE( [Equity Value],
+    FILTER( ALLSELECTED( financials_long ),
+            financials_long[Year] = [Base Year (selected)] ) )
+
+-- financials_long[Equity Index %]
+Equity Index % = 
+VAR v = [Equity Value]
+VAR b = [Equity Base]
+RETURN IF( NOT ISBLANK(v) && NOT ISBLANK(b) && b <> 0, DIVIDE( v, b ) * 100 )
+
+-- financials_long[Equity Value]
+Equity Value = 
+CALCULATE( SUM( financials_long[Value] ),
+           financials_long[Variable_Name] = "equity" )
+
+-- financials_long[Revenue Base]
+Revenue Base = 
+CALCULATE( [Revenue Value],
+    FILTER( ALLSELECTED( financials_long ),
+            financials_long[Year] = [Base Year (selected)] ) )
+
+-- financials_long[Revenue Index %]
+Revenue Index % = 
+VAR v = [Revenue Value]
+VAR b = [Revenue Base]
+RETURN IF( NOT ISBLANK(v) && NOT ISBLANK(b) && b <> 0, DIVIDE( v, b ) * 100 )
+
+-- financials_long[Revenue Value]
+Revenue Value = 
+CALCULATE( SUM( financials_long[Value] ),
+           financials_long[Variable_Name] = "revenue" )
+
+-- palette[Legend Dot]
+Legend Dot = UNICHAR(11044)
+
+-- ratios[Base Year (selected)]
+Base Year (selected) = 
+CALCULATE( MIN( years[Year] ), ALLSELECTED( years[Year] ) )
+
+-- ratios[Color Hex]
+Color Hex = 
+VAR bucket = [Norm Status]
+RETURN LOOKUPVALUE( palette[hex], palette[label], bucket )
+
+-- ratios[Delta vs Base]
+Delta vs Base = 
+VAR u        = SELECTEDVALUE( ratio_norms[unit] )
+VAR vL       = [Value (Latest)]
+VAR vB       = [Value (Base)]
+VAR sameYear = [Latest Year (selected)] = [Base Year (selected)]
+RETURN
+IF(
+    ISBLANK(vL) || ISBLANK(vB) || sameYear,
+    BLANK(),
+    IF( u = "%", DIVIDE( vL - vB, vB ), vL - vB )
+)
+
+-- ratios[Latest Year]
+Latest Year = 
+MAX( years[Year] )
+
+-- ratios[Latest Year (selected)]
+Latest Year (selected) = CALCULATE( MAX(years[Year]), ALLSELECTED(years[Year]) )
+
+-- ratios[Norm High]
+Norm High = MIN( ratio_norms[norm_high] )
+
+-- ratios[Norm Low]
+Norm Low = MIN( ratio_norms[norm_low] )
+
+-- ratios[Norm Status]
+Norm Status = 
+VAR v  = [Ratio Value]
+VAR lo = [Norm Low]
+VAR hi = [Norm High]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), BLANK(),
+    NOT ISBLANK(hi) && v > hi, "above",
+    NOT ISBLANK(lo) && v < lo, "below",
+    "at_norm"
+)
+
+-- ratios[Ratio Value]
+Ratio Value = SUM( ratios[Value] )
+
+-- ratios[Value (Base)]
+Value (Base) = 
+    VAR y = [Base Year (selected)]
+    RETURN CALCULATE( [Ratio Value], years[Year] = y )
+
+-- ratios[Value (Latest)]
+Value (Latest) = 
+VAR y = [Latest Year (selected)]
+RETURN CALCULATE( [Ratio Value], years[Year] = y )
+
+-- ratios[Value (Prev)]
+Value (Prev) = 
+VAR y = [Latest Year]
+RETURN CALCULATE( [Ratio Value], years[Year] = y - 1 )
+
+-- ratios[YoY Chip]
+YoY Chip = 
+VAR u   = SELECTEDVALUE( ratio_norms[unit] )
+VAR d   = [Delta vs Base]
+VAR fmt = IF( u = "%", "+0%;-0%;0%", "+0.0;-0.0;0.0" )
+VAR arrow = IF( ISBLANK(d), "", IF( d > 0, "▲ ", IF( d < 0, "▼ ", "" ) ) )
+RETURN IF( ISBLANK(d), "–", arrow & FORMAT( d, fmt ) )
+
+-- ratios[YoY Color]
+YoY Color = 
+VAR better = SELECTEDVALUE( ratio_norms[better_is] )   -- "higher" or "lower"
+VAR d      = [YoY Δ]                                   -- absolute YoY change
+VAR bucket =
+    SWITCH(
+        TRUE(),
+        ISBLANK(d) || d = 0, BLANK(),                 -- neutral case: no palette bucket
+        (better = "higher" && d > 0) ||
+        (better = "lower"  && d < 0),  "above",       -- movement in the desired direction
+        "below"                                       -- movement in the undesired direction
+    )
+RETURN
+IF(
+    ISBLANK(bucket),
+    "#9E9E9E",                                        -- neutral gray when blank/zero
+    LOOKUPVALUE( palette[hex], palette[label], bucket )  -- pick hex from palette
+)
+
+-- ratios[YoY Δ]
+YoY Δ = 
+[Value (Latest)] - [Value (Prev)]
+
+-- Sections[Label Spaced]
+Label Spaced = 
+VAR s0 =
+    COALESCE(
+        SELECTEDVALUE('Sections'[label]),
+        CALCULATE(MIN('Sections'[label]), ALL('Sections'))
+    )
+VAR s = UPPER(LEFT(s0,1)) & MID(s0,2,LEN(s0)-1)
+VAR n = LEN(s)
+RETURN
+IF(
+    n > 0,
+    CONCATENATEX(
+        GENERATESERIES(1,n),
+        MID(s,[Value],1) &
+        IF([Value] < n, IF(MOD([Value],2)=1, UNICHAR(8202), UNICHAR(8203)), "")
+    )
+)
+
+

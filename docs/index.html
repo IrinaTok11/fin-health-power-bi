@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<base href="./"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>
+    Financial Health — Power BI
+    </title>
+<meta content="#52837B" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/css/portfolio.css" rel="stylesheet"/>
+<meta content="Decision-ready financial health dashboard: 12 KPIs with norms and risk flags." name="description"/>
+<meta content="Financial Health — Power BI" property="og:title"/>
+<meta content="Decision-ready financial health dashboard: 12 KPIs with norms and risk flags." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+</head>
+<body>
+<nav class="topnav">
+<div class="wrap navwrap">
+<a class="brand" href="index.html#top">
+        Irina Tokmianina
+        </a>
+<div class="navlinks">
+<a href="#highlights">
+          HIGHLIGHTS
+          </a>
+<a href="#variants">
+          VARIANTS
+          </a>
+<a href="#screens">
+          SCREENSHOTS
+          </a>
+<a href="#tech-stack">
+          TECH STACK
+          </a>
+<a href="methodology.html">
+          METHODOLOGY
+          </a>
+<a href="#links">
+          LINKS
+          </a>
+<a class="contact" href="#contact">
+          CONTACT
+          </a>
+</div>
+</div>
+</nav>
+<a id="top">
+</a>
+<header class="hero hero--green">
+<div class="wrap">
+<h1>
+          Financial Health — Power BI
+        </h1>
+<p class="lead">
+          Decision-ready financial health dashboard with 12 KPIs, norm bands, and risk flags (2021–2023)
+        </p>
+<div class="cta-row">
+<a class="btn" href="https://github.com/IrinaTok11/fin-health-power-bi" rel="noopener" target="_blank">
+          Repository
+          </a>
+<a class="btn outline" download="" href="../fin-health.pbix">
+          Download PBIX
+          </a>
+</div>
+</div>
+</header>
+<section class="summary-band">
+<div class="wrap">
+<h2 class="summary-title">
+          Executive summary
+        </h2>
+<p class="summary-text">
+          This
+          <strong>
+          reproducible
+          </strong>
+          Power BI report demonstrates a
+          <strong>
+          transparent
+          </strong>
+          approach to financial health monitoring. All metrics are defined up front; norms and thresholds are stated on the page; and every figure can be traced to a documented source table. Data is anonymised and time‑boxed to avoid any client‑identifying detail. The layout mirrors the Python prototype so that numbers match across tools. The project is
+          <strong>
+          designed for auditability
+          </strong>
+          : a consistent
+          <strong>
+          status colour (hex)
+          </strong>
+          scale, clear labelling, and a concise methodology page show exactly how each KPI is derived. The result is a practical, review‑ready dashboard rather than a design exercise.
+        </p><p class="note-inline"><strong>Who this is for: </strong>Executive leadership and finance leads; licensed insolvency practitioners (administrators, liquidators, CVA supervisors); and restructuring and turnaround advisers.</p>
+</div>
+</section>
+<section class="status-band">
+<div class="wrap">
+<h2 class="status-title">
+          Status colour scale
+        </h2>
+<p class="status-text">
+          Bar/column charts use a consistent status colour (hex) to encode KPI health —
+          <strong>
+          above norm
+          </strong>
+          ,
+          <strong>
+          at norm
+          </strong>
+          , or
+          <strong>
+          below norm
+          </strong>
+          — providing an instant, visual read on a company’s condition. Where needed, the logic is implemented with
+          <strong>
+          DAX
+          </strong>
+          measures and Deneb (Vega‑Lite JSON) to keep the encoding reproducible across visuals. The same mapping drives
+          <strong>
+          badges, legend dots and bars
+          </strong>
+          , so one glance gives a consistent judgement across pages and years. Soft norm bands keep neutral states neutral while still surfacing genuine outliers.
+        </p>
+</div>
+</section>
+<section class="section section--white" id="role-impact">
+<div class="wrap wide">
+<h2>
+          Role and impact
+        </h2>
+<ul class="facts">
+<li>
+<strong>
+            Role:
+            </strong>
+            Financial/BI Analyst — end-to-end delivery (data model, DAX, visuals, QA)
+          </li>
+<li>
+<strong>
+            Method:
+            </strong>
+            Product-style KPI catalogue with norm bands and defensive rules
+          </li>
+<li>
+<strong>
+            Reusability:
+            </strong>
+            Versioned measures and Vega-Lite specs; easy to port to new data
+          </li>
+<li>
+<strong>
+            Transparency:
+            </strong>
+            Reproducibility checklist, anonymised sample, clean repo structure
+          </li>
+</ul>
+</div>
+</section>
+<section class="section section--gray" id="highlights">
+<div class="wrap wide">
+<h2>
+          Highlights
+        </h2>
+<ul class="facts">
+<li>
+            12 KPIs across liquidity, financial stability, and profitability with norms and trends
+          </li>
+<li>
+            Clean card layout with norm bands and trend arrows
+          </li>
+<li>
+            Three-year comparison plus indexed micro-charts
+          </li>
+</ul>
+</div>
+</section>
+<section class="section section--white" id="variants">
+<div class="wrap wide">
+<h2>
+          Design variants
+        </h2>
+<table class="variants">
+<thead>
+<tr>
+<th>
+              Variant
+              </th>
+<th>
+              Intent
+              </th>
+<th>
+              Where to use
+              </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+              v1 — rounded cards
+              </td>
+<td>
+              Web/presentation look with soft background
+              </td>
+<td>
+              On-screen portfolio
+              </td>
+</tr>
+<tr>
+<td>
+              v2 — flat, print-friendly
+              </td>
+<td>
+              Same numbers; flat skin for clean Word crops
+              </td>
+<td>
+              Word
+              <em>
+              3.2 Analysis of liquidity ratios
+              </em>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="note-inline">
+          For a similar implementation in Python (data processing + Word/Excel reporting), see:
+          <a href="https://irinatok11.github.io/fin-health-python" target="_blank">
+          live page
+          </a>
+          ·
+          <a href="https://github.com/IrinaTok11/fin-health-python" target="_blank">
+          repository
+          </a>
+</p>
+</div>
+</section>
+<section class="section section--gray" id="screens">
+<div class="wrap wide">
+<h2>
+          Screenshots
+        </h2>
+<p class="note-inline">
+          The two screenshots below show the same report in both skins (v1 web, v2 print‑friendly).
+        </p>
+<figure class="shot">
+<img alt="Dashboard v1 — rounded cards" src="cover.png"/>
+<figcaption>
+            Page 1 — rounded cards (v1)
+          </figcaption>
+</figure>
+<figure class="shot">
+<img alt="Dashboard v2 — flat cards" src="cover2.png"/>
+<figcaption>
+            Page 2 — flat cards (v2, print-friendly)
+          </figcaption>
+</figure>
+</div>
+</section>
+<section class="section section--white" id="tech-stack">
+<div class="wrap wide">
+<h2>
+          Tech stack and versions
+        </h2>
+<ul class="facts">
+<li>
+<strong>
+            Power BI Desktop:
+            </strong>
+            current release (specify exact build if required)
+          </li>
+<li>
+<strong>
+            DAX:
+            </strong>
+            comma-separated args; naming:
+            <code>
+            grp__KPI__SubKPI__Measure
+            </code>
+</li>
+<li>
+<strong>
+            Deneb / Vega-Lite:
+            </strong>
+            JSON specs (no comments), versioned
+          </li>
+<li>
+<strong>
+            Data:
+            </strong>
+            anonymised Excel sample (structure only)
+          </li>
+</ul>
+<h3 style="margin-top:10px;">
+          How to open the PBIX
+        </h3>
+<ol class="facts">
+<li>
+            Download
+            <code>
+            fin-health.pbix
+            </code>
+            and open in Power BI Desktop
+          </li>
+<li>
+            If prompted, keep relative paths; the anonymised sample is bundled
+          </li>
+</ol>
+</div>
+</section>
+<section class="section section--gray" id="links">
+<div class="wrap wide">
+<h2>
+          Links
+        </h2>
+<ul class="facts">
+<li>
+<strong>
+            Repository:
+            </strong>
+<a href="https://github.com/IrinaTok11/fin-health-power-bi" rel="noopener" target="_blank">
+            github.com/IrinaTok11/fin-health-power-bi
+            </a>
+</li>
+<li>
+<strong>
+            PBIX download:
+            </strong>
+<a download="" href="../fin-health.pbix">
+            fin-health.pbix
+            </a>
+</li>
+<li>
+<strong>
+            Methodology:
+            </strong>
+<a href="methodology.html">
+            Methodology page
+            </a>
+</li>
+<li>
+<strong>
+            Python portfolio:
+            </strong>
+<a href="https://irinatok11.github.io/fin-health-python" rel="noopener" target="_blank">
+            live page
+            </a>
+            ·
+            <a href="https://github.com/IrinaTok11/fin-health-python" rel="noopener" target="_blank">
+            repository
+            </a>
+</li>
+</ul>
+</div>
+</section>
+<section class="section section--white">
+<div class="wrap wide">
+<h2>
+          Data and privacy
+        </h2>
+<p class="note-inline">
+          This portfolio case uses anonymised sample data. No client-identifying information is included.
+        </p>
+</div>
+</section>
+<section class="contact-band" id="contact">
+<div class="wrap">
+<h2 class="contact-title">
+          Get in touch
+        </h2>
+<p class="contact-sub">
+          Connect on LinkedIn, explore projects on GitHub, or send an email
+        </p>
+<div class="contact-icons">
+<a aria-label="LinkedIn" class="icon-circle" href="https://www.linkedin.com/in/tokmianina" rel="noopener" target="_blank">
+<svg fill="var(--green)" height="28" viewbox="0 0 448 512" width="28" xmlns="http://www.w3.org/2000/svg">
+<path d="M100.28 448H7.4V148.9h92.88zm-46.44-341a53.67 53.67 0 1 1 53.67-53.67 53.67 53.67 0 0 1-53.67 53.67zM447.9 448h-92.4V302.4c0-34.7-12.5-58.4-43.6-58.4-23.8 0-38 16-44.3 31.4-2.3 5.6-2.9 13.4-2.9 21.3V448h-92.4s1.2-267.1 0-295.1h92.4v41.8c12.3-19 34.3-45.9 83.6-45.9 61 0 106.6 39.8 106.6 125.2z">
+</path>
+</svg>
+</a>
+<a aria-label="Email" class="icon-circle" href="mailto:irinatokmianina@gmail.com">
+<svg fill="white" height="28" viewbox="0 0 16 16" width="28" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217l-8 4.8-8-4.8V4z">
+</path>
+<path d="M0 6.383v5.617a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6.383l-7.555 4.533a.5.5 0 0 1-.89 0L0 6.383z">
+</path>
+</svg>
+</a>
+<a aria-label="GitHub" class="icon-circle" href="https://github.com/IrinaTok11" rel="noopener" target="_blank">
+<svg fill="white" height="28" viewbox="0 0 16 16" width="28" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38
+           0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+           -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+           0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.03
+           2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+           0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+</path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<footer class="footer">
+<div class="wrap">
+<p class="legal">
+          MIT licence  •  Updated Aug 2025  •  © Irina Tokmianina  •  Financial / BI Analyst
+        </p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,304 @@
+
+:root {
+  --green:#52837B;
+  --gray:#F0F0F0;
+  --ink:#606060;
+  --ink-muted:#66707a;
+  --wrap:1280px;
+}
+
+* { box-sizing:border-box }
+
+html,body { margin:0; padding:0 }
+
+.wrap { max-width:var(--wrap); margin:0 auto; padding:28px 40px }
+.wrap.wide { max-width:var(--wrap) }
+
+.hero .wrap, .topnav .wrap { padding-left:40px; padding-right:40px }
+
+a { color: var(--green); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px; }
+a:visited { color: var(--green); }
+
+.topnav { position:sticky; top:0; z-index:50; background:var(--green); }
+.navwrap { display:flex; align-items:center; justify-content:space-between; height:80px; padding:0; }
+
+.topnav .brand {
+  font-family:"Open Sans",sans-serif;
+  font-size:17px; font-weight:600; color:#fff; text-decoration:none; line-height:1;
+}
+
+.topnav .navlinks { display:flex; gap:36px; align-items:center; }
+.topnav .navlinks a {
+  display:inline-flex; align-items:center; height:80px;
+  font-family:"Open Sans",sans-serif;
+  font-size:14px; font-weight:300; letter-spacing:.06em; text-transform:uppercase;
+  color:#fff; text-decoration:none;
+}
+.topnav .navlinks a:hover { text-decoration:underline; text-underline-offset:3px; }
+.topnav .navlinks .contact {
+  height:40px; padding:0 18px; display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; color:var(--green); border-radius:12px; font-weight:600; letter-spacing:0; line-height:1;
+}
+
+.hero {
+  color:#fff; background:var(--green); padding:95px 0 75px; border-bottom:1px solid rgba(255,255,255,.18)
+}
+
+.cta-row { display:flex; gap:12px; flex-wrap:wrap }
+
+.btn {
+  display:inline-block; padding:12px 18px; border-radius:12px; background:#fff; color:var(--green);
+  text-decoration:none; font-weight:700; border:1px solid #fff
+}
+.btn:hover { filter:brightness(.98) }
+.btn.outline { background:transparent; color:#fff; border-color:#fff }
+
+.section { padding:42px 0 58px }
+.section--white { background:#fff }
+.section--gray { background:var(--gray); border-top:1px solid #e6e6e6 }
+
+/* Small text / cards occasionally used on both sites */
+.mini { font-size:14px; color:var(--ink-muted); margin-top:10px }
+.card { background:#fff; border:1px solid #e9e9e9; border-radius:12px; padding:20px }
+
+.facts li { margin:6px 0 }
+
+.grid.two { display:grid; gap:20px; grid-template-columns:repeat(2,minmax(0,1fr)) }
+@media (max-width:960px) { .grid.two { grid-template-columns:1fr } }
+
+.shot { background:#fff; border:1px solid #e9e9e9; border-radius:12px; padding:12px; margin:0 0 20px 0 }
+.shot img { width:100%; display:block; border-radius:12px }
+.shot figcaption { font-size:13px; color:var(--ink-muted); margin-top:8px }
+
+table.variants { width:100%; border-collapse:collapse; margin:20px 0; font-size:15px }
+table.variants th, table.variants td { border:1px solid #E9EAEA; padding:10px; text-align:left }
+table.variants th { text-align:center; font-weight:700; background:var(--gray) }
+table.variants tbody tr:nth-child(even) { background:#fafafa }
+table.variants tbody tr:hover { background:#f4f8f7 }
+
+html { scroll-behavior:smooth }
+section { scroll-margin-top:80px }
+:focus-visible { outline:2px solid var(--green); outline-offset:2px }
+
+.contact-band .wrap { padding-left:40px; padding-right:40px }
+
+.icon-circle {
+  display:inline-flex; align-items:center; justify-content:center; width:60px; height:60px;
+  border-radius:50%; background:#fff; margin:0 8px; transition:all .2s ease
+}
+.icon-circle svg { width:28px; height:28px; fill:var(--green) }
+.icon-circle:hover { background:#f0f0f0 }
+
+/* Contact CTA chips (Python style; harmless if unused on Power BI) */
+.contact-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:6px }
+.chip-btn { background:#fff; color:var(--green); border:1px solid #fff; padding:10px 16px; font-weight:700; border-radius:12px }
+.chip-btn:hover { filter:brightness(.98); text-decoration:none }
+
+.footer small a { color:#fff; text-decoration:none }
+.footer small a:hover { text-decoration:underline }
+
+/* Custom list bullets */
+ul { margin:0 0 18px; padding-left:0; }
+ul li {
+  margin:8px 0; position:relative; list-style:none; padding-left:6px;
+}
+ul li::before {
+  content:''; position:absolute; left:-17px; top:50%; transform:translateY(-50%);
+  width:9px; height:9px; background:var(--green); border-radius:50%;
+}
+
+/* Inline notes */
+.note-inline { font-size:14px; color:var(--ink-muted); margin-top:28px; font-style:italic; }
+.note-inline a { color:var(--green); font-style:normal; font-weight:600; }
+
+.contact-sub { opacity:.95; margin:0 0 16px; margin-bottom:28px !important; }
+
+.hero .note-inline a { color:#fff }
+code { font-family:inherit; font-size:100%; background:transparent; padding:0 0; }
+
+.methodology-hero .wrap > :last-child { margin-bottom:0 !important; }
+.section .wrap > :last-child { margin-bottom:0; }
+
+.facts em { font-style:normal }
+
+h2 { margin:0 0 24px; color:var(--green); font-weight:700; font-size:30px; }
+h3 { font-weight:700; line-height:1.35; }
+
+.hero .note-inline {
+  color:#fff; opacity:.85; font-weight:400; margin-top:14px !important;
+}
+
+.hero h1 {
+  font-weight:700; font-size:clamp(32px,3.2vw + 12px,52px); line-height:1.2; margin:-2px 0 20px;
+}
+.hero .cta-row { margin-top:0 !important; }
+.hero.hero--green { padding:102px 0 !important; }
+.methodology-hero { padding:102px 0 !important; }
+
+body, p, .facts { font-weight:400; }
+.facts strong { font-weight:700; }
+p { font-weight:400; }
+
+.facts { margin:0; line-height:1.65; font-weight:400; }
+
+.hero .lead {
+  max-width:860px; margin:0 0 45px !important; font-size:18px; line-height:1.5; font-weight:400;
+}
+
+body {
+  font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:#fff; line-height:1.6;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  font-weight:400; color:var(--ink);
+}
+
+.contact-band, .contact-band .wrap, footer, footer .wrap {
+  text-align:center; margin-left:auto; margin-right:auto;
+}
+
+.section .note-inline { font-style: normal !important; font-size:1rem !important; color:var(--ink) !important; margin-top:34px !important; }
+.section .note-inline a { font-style:normal !important; }
+
+.contact-band .icons { margin:16px 0 0 !important; }
+
+.contact-band .copyright {
+  position:relative !important; transform:none !important; top:auto !important;
+  margin:14px auto 20px !important; text-align:center;
+}
+
+.contact-band .wrap, .footer .wrap { text-align:center !important; }
+.contact-title, .contact-sub { text-align:center !important; }
+
+.footer small { display:inline-block; text-align:center; }
+.contact-title { color:#fff; margin:0 0 6px !important; }
+
+.contact-band {
+  background:var(--green); color:#fff; text-align:center;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding:42px 0 18px !important;
+}
+
+.footer {
+  background:var(--green); text-align:center; color:#fff; padding:4px 0 59px !important;
+}
+
+/* Headings that are immediately followed by note */
+.section h2 + .note-inline { margin-top:0 !important; color:inherit !important; font-style:normal !important; }
+.contact-band h2 + .note-inline { margin-top:14px !important; }
+
+.section ul.facts { padding-left:1.25em; list-style-position:outside; margin-left:0; margin-top:0; margin-bottom:18px; }
+.section ul.facts li, .section ol.facts li { line-height:1.65; margin:0 0 6px 0; }
+.section .facts { font-size:1rem; }
+.section .facts li { font-size:inherit; }
+.section .facts strong { font-weight:700; font-size:1rem; letter-spacing:0; }
+.section h3 { margin:18px 0 10px; }
+
+.section ul.facts:has(> li:only-child) { list-style:none; padding-left:0; margin-left:0; }
+
+.section ol.facts {
+  list-style:none; margin-left:0; padding-left:1.5em; counter-reset:facts;
+}
+.section ol.facts li { position:relative; counter-increment:facts; }
+.section ol.facts li::before {
+  content:counter(facts) "."; position:absolute; left:calc(-1.5em - 8px);
+  width:1.5em; text-align:right;
+}
+
+.hero .wrap > h1 {
+  margin-top:-4px !important; margin-right:0 !important; margin-left:0 !important; margin-bottom:15px !important;
+}
+
+/* Contact icons spacing (single source of truth) */
+@media (max-width:640px) { .contact-icons { gap:18px; } }
+@media (max-width:640px) { .contact-icons { gap:12px !important; } } /* narrower phones */
+@media (max-width:640px) { .contact-icons { gap:11px !important; } } /* legacy tweak */
+.contact-icons a { width:52px; height:52px; line-height:52px; font-size:22px; margin:0 !important; }
+.contact-icons {
+  display:flex; justify-content:center !important; margin-bottom:12px; margin-left:auto; margin-right:auto; gap:17px !important;
+}
+
+/* Header container positioning */
+.site-header, header { position:relative; }
+
+/* Gallery / figures (used on Python; safe to keep here) */
+.gallery { display:grid; grid-template-columns:1fr; gap:16px; margin:8px 0 8px }
+.gallery.two-col { grid-template-columns:1fr; gap:18px }
+@media (min-width:820px) { .gallery.two-col { grid-template-columns:1fr 1fr } }
+
+figure { margin:0 }
+figure img { display:block; width:100%; height:auto; border-radius:12px }
+figure > figcaption {
+  padding:5px 0 5px 10px !important; font-size:14px; color:var(--ink-muted); margin-top:8px; text-align:center;
+}
+
+.sep { border:0; border-top:1px solid #e6e6e6; margin:28px 0 }
+
+/* Codebox component (Python; harmless on Power BI) */
+.codebox {
+  border:1px solid #dcdcdc; border-radius:12px; background:#fff; overflow:auto; box-shadow:0 2px 4px rgba(0,0,0,.03)
+}
+.codebox__hd {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:10px 12px; border-bottom:1px solid #e7e7e7; border-radius:12px 12px 0 0;
+  background:linear-gradient(180deg,#F4F7F7,#ECF2F2)
+}
+.codebox__title { font-size:13px; font-weight:600; color:var(--green); letter-spacing:.02em }
+button.codebox__btn {
+  appearance:none; -webkit-appearance:none; border:1px solid #d0d0d0; background:#fff; border-radius:10px;
+  padding:6px 10px; font-size:12px; line-height:1; color:#2b2b2b; cursor:pointer; box-shadow:0 1px 0 rgba(0,0,0,.02)
+}
+button.codebox__btn:hover { filter:brightness(.98) }
+.codebox pre {
+  margin:0; padding:14px 16px; background:#FAFBFB; border-radius:0 0 12px 12px;
+  font:13.5px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#2b2b2b; overflow:auto
+}
+.codebox code { font:inherit }
+
+/* Article typography (Python pages) */
+.article { max-width:960px }
+.article h2 { margin:0 0 12px }
+.article h3 { margin:20px 0 8px }
+.article p { margin:8px 0 12px }
+.article ul, .article ol { margin:8px 0 12px 0; padding-left:1.15rem; list-style-position:outside; }
+.article li { margin:4px 0; line-height:1.65; }
+.article ol li::marker, .article ul li::marker { font-variant-numeric:tabular-nums; }
+.article ol li { padding-left:0.24rem; }
+
+/* Footer legal text size */
+.footer .legal { font-size:13px; }
+
+/* NAV behavior (single consistent logic) */
+@media (max-width:640px) { .topnav .navlinks { display:none } }
+@media (min-width:641px) { .topnav .navlinks { display:flex } }
+
+/* Optional compatibility: some Power BI pages may use .nav-desktop wrapper */
+@media (max-width:639.98px) { .nav-desktop { display:none !important; } }
+@media (min-width:640px)   { .nav-desktop { display:flex !important; } }
+
+/* Ensure no hamburger shown (as per project decision) */
+.hamburger { display:none !important; }
+
+/* Summary band (used on both) */
+.summary-band { padding:42px 0 58px; background:#fff; }
+.summary-title { margin:0 0 24px; }
+.summary-text { margin:0; }
+.summary-band.section--gray { background:var(--gray); border-top:1px solid #e6e6e6; }
+
+.summary-band .note-inline {
+  font-style: normal !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  color: var(--ink) !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+}
+.summary-band .note-inline strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+/* Status band (Power BI specific alias) */
+.status-band { padding:42px 0 58px; background:var(--gray); border-top:1px solid #e6e6e6; }
+.status-title { margin:0 0 24px; }
+.status-text { margin:0; }
