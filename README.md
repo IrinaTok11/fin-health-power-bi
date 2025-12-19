@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17979566.svg)](https://doi.org/10.5281/zenodo.17979566)
+
 # Integra LLC — Financial health dashboard (Power BI)
 
 A product-style, reproducible **financial health dashboard** for a mid-sized company (2021–2023).  
