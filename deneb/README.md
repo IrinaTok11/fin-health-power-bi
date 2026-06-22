@@ -6,12 +6,12 @@ The dashboard reuses a small set of **canonical templates**; KPI cards only diff
 
 ## Files (templates)
 
-- `templates/kpi_bars_numeric.vl.json` — bar KPI **with a shaded norm band per KPI**; Y is a number (ratios, months).
-- `templates/kpi_bars_percent.vl.json` — bar KPI **with a shaded norm band per KPI**; Y is a percentage (ROA/ROE/margins, equity share).
-- `templates/trend_pnl.vl.json` — row **4.2** · P&L sparkline (Revenue / EBIT / Net profit).
-- `templates/trend_indexed.vl.json` — row **4.3** · Indexed trend sparkline (Assets / Equity / Revenue).
-- `templates/legend_status.vl.json` — compact legend (top-right): **below / at_norm / above**.
-- `templates/row_labels.vl.json` — vertical row labels (left edge of the grid).
+- `templates/kpi_bars_numeric.vl.json` - bar KPI **with a shaded norm band per KPI**; Y is a number (ratios, months).
+- `templates/kpi_bars_percent.vl.json` - bar KPI **with a shaded norm band per KPI**; Y is a percentage (ROA/ROE/margins, equity share).
+- `templates/trend_pnl.vl.json` - row **4.2** · P&L sparkline (Revenue / EBIT / Net profit).
+- `templates/trend_indexed.vl.json` - row **4.3** · Indexed trend sparkline (Assets / Equity / Revenue).
+- `templates/legend_status.vl.json` - compact legend (top-right): **below / at_norm / above**.
+- `templates/row_labels.vl.json` - vertical row labels (left edge of the grid).
 
 > If you export files under different names, keep the same structure and update the names above.
 
@@ -21,9 +21,9 @@ The dashboard reuses a small set of **canonical templates**; KPI cards only diff
 
 Each KPI bar visual includes a **shaded norm band** that reflects the acceptable range for that **specific KPI**.  
 The band is driven by DAX measures:
-- **`[Norm Low]`**, **`[Norm High]`** — thresholds per KPI, sourced from the `ratio_norms` table  
-- **`[Ratio Value]`** — the KPI value for the selected year(s)  
-- **`[Norm Status]`** and **`[Color Hex]`** — status and palette colour for the bar
+- **`[Norm Low]`**, **`[Norm High]`** - thresholds per KPI, sourced from the `ratio_norms` table  
+- **`[Ratio Value]`** - the KPI value for the selected year(s)  
+- **`[Norm Status]`** and **`[Color Hex]`** - status and palette colour for the bar
 
 This ensures consistent, per-indicator evaluation: the band’s position/width changes by KPI according to its norms.
 
@@ -63,7 +63,7 @@ Minor cosmetic tweaks (bar width, padding, small opacity changes) are styling an
 
 ## KPI → template mapping (matches the dashboard layout)
 
-### Row 1 — Liquidity
+### Row 1 - Liquidity
 | Pos | KPI              | Template                        | Notes                      |
 |----:|------------------|----------------------------------|----------------------------|
 | 1.1 | Cash ratio       | `kpi_bars_numeric.vl.json`       | numeric, format `0.00`     |
@@ -71,7 +71,7 @@ Minor cosmetic tweaks (bar width, padding, small opacity changes) are styling an
 | 1.3 | Quick ratio      | `kpi_bars_numeric.vl.json`       | numeric, format `0.00`     |
 | 1.4 | Months to repay  | `kpi_bars_numeric.vl.json`       | months, format `0.0`       |
 
-### Row 2 — Financial stability
+### Row 2 - Financial stability
 | Pos | KPI             | Template                        | Notes                                 |
 |----:|-----------------|----------------------------------|---------------------------------------|
 | 2.1 | Equity ratio    | `kpi_bars_percent.vl.json`       | share of assets                       |
@@ -79,7 +79,7 @@ Minor cosmetic tweaks (bar width, padding, small opacity changes) are styling an
 | 2.3 | Working capital | `kpi_bars_numeric.vl.json`       | allow negatives; zero line emphasised |
 | 2.4 | Altman index    | `kpi_bars_numeric.vl.json`       | Z-score bands via norm band           |
 
-### Row 3 — Profitability
+### Row 3 - Profitability
 | Pos | KPI               | Template                        | Notes  |
 |----:|-------------------|----------------------------------|--------|
 | 3.1 | Return on assets  | `kpi_bars_percent.vl.json`       | ROA    |
@@ -87,7 +87,7 @@ Minor cosmetic tweaks (bar width, padding, small opacity changes) are styling an
 | 3.3 | Net profit margin | `kpi_bars_percent.vl.json`       | margin |
 | 3.4 | EBITDA margin     | `kpi_bars_percent.vl.json`       | margin |
 
-### Row 4 — Structure & trends
+### Row 4 - Structure & trends
 | Pos | Visual                          | Spec                              | Notes                                    |
 |----:|---------------------------------|-----------------------------------|------------------------------------------|
 | 4.1 | Structure of current assets     | *(native PBI or custom)*          | cash / inventories / receivables         |
